@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">💰 Payments</h2>
+
+<!-- Payment Form -->
+<div class="card p-4 mb-4 shadow">
+
+    <h5>Add Payment</h5>
+
+    <form action="/add_payment" method="POST">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <label>Select Member</label>
+                <select name="member_id" class="form-control" required>
+                    {% for m in members %}
+                        <option value="{{ m[0] }}">{{ m[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label>Amount</label>
+                <input type="number" name="amount" class="form-control" placeholder="Enter amount" required>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-success w-100">Add</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Payments Table -->
+<div class="card p-4 shadow">
+
+    <h5>Payment Records</h5>
+
+    <table class="table table-hover mt-3">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Member</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for p in payments %}
+            <tr>
+                <td>{{ p[0] }}</td>
+                <td>{{ p[1] }}</td>
+                <td><strong>₹{{ p[2] }}</strong></td>
+                <td>{{ p[3] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

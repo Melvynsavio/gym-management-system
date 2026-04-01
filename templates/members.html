@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Members</h2>
+
+<form action="/add_member" method="POST">
+
+    <input type="text" name="name" placeholder="Name" class="form-control mb-2" required>
+    <input type="number" name="age" placeholder="Age" class="form-control mb-2" required>
+    <input type="text" name="phone" placeholder="Phone" class="form-control mb-2" required>
+
+    <select name="plan_id" class="form-control mb-2" required>
+        {% for p in plans %}
+        <option value="{{ p[0] }}">{{ p[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <button class="btn btn-primary">Add Member</button>
+
+</form>
+
+<hr>
+
+<table class="table table-bordered">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Phone</th>
+    <th>Plan</th>
+    <th>Actions</th>
+</tr>
+
+{% for m in members %}
+<tr>
+    <td>{{ m[0] }}</td>
+    <td>{{ m[1] }}</td>
+    <td>{{ m[2] }}</td>
+    <td>{{ m[3] }}</td>
+    <td>{{ m[4] }}</td>
+
+    <td>
+        <a href="/edit_member/{{ m[0] }}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="/delete_member/{{ m[0] }}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

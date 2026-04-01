@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Plans</h2>
+
+<form action="/add_plan" method="POST">
+    <input type="text" name="name" class="form-control mb-2" placeholder="Plan Name">
+    <input type="number" name="price" class="form-control mb-2" placeholder="Price">
+    <input type="number" name="duration" class="form-control mb-2" placeholder="Duration">
+
+    <button class="btn btn-success">Add Plan</button>
+</form>
+
+<hr>
+
+<table class="table table-bordered">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Duration</th>
+    <th>Actions</th>
+</tr>
+
+{% for p in plans %}
+<tr>
+    <td>{{ p[0] }}</td>
+    <td>{{ p[1] }}</td>
+    <td>{{ p[2] }}</td>
+    <td>{{ p[3] }}</td>
+
+    <td>
+        <a href="/edit_plan/{{ p[0] }}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="/delete_plan/{{ p[0] }}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

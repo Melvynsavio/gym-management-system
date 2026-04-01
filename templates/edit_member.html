@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Member</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container mt-4">
+
+<h2>Edit Member</h2>
+
+<form action="/update_member/{{ member[0] }}" method="POST">
+
+    <input type="text" name="name" value="{{ member[1] }}" class="form-control mb-2" required>
+
+    <input type="number" name="age" value="{{ member[2] }}" class="form-control mb-2" required>
+
+    <input type="text" name="phone" value="{{ member[3] }}" class="form-control mb-2" required>
+
+    <!-- ✅ FIXED DROPDOWN -->
+    <select name="plan_id" class="form-control mb-2" required>
+        {% for p in plans %}
+            <option value="{{ p[0] }}" {% if p[0] == member[4] %}selected{% endif %}>
+                {{ p[1] }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button class="btn btn-success">Update</button>
+
+</form>
+
+</body>
+</html>
